@@ -30,5 +30,17 @@
     "pendingUpload": "Pending upload",
     "removeFile": "Remove file",
     "errorMessage": "Error: "
+  },
+  "JobDescriptionUploadTextArea": {
+    "emptyError": "Job description cannot be empty.",
+    "missingResumeIdError": "Missing resume ID.",
+    "submitSuccess": "Job description submitted successfully!",
+    "label": "Job Description",
+    "placeholder": "Paste the job description here...",
+    "submitting": "Submitting...",
+    "submitted": "Submitted!",
+    "next": "Next",
+    "improving": "Improving...",
+    "improve": "Improve"
   }
 }

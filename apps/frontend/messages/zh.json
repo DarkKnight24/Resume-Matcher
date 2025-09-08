@@ -30,5 +30,17 @@
     "pendingUpload": "等待上传",
     "removeFile": "删除文件",
     "errorMessage": "错误："
+  },
+  "JobDescriptionUploadTextArea": {
+    "emptyError": "职位描述不能为空。",
+    "missingResumeIdError": "缺少简历ID。",
+    "submitSuccess": "职位描述提交成功！",
+    "label": "职位描述",
+    "placeholder": "在此处粘贴职位描述...",
+    "submitting": "提交中...",
+    "submitted": "已提交！",
+    "next": "下一步",
+    "improving": "优化中...",
+    "improve": "优化"
   }
 }

@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useResumePreview } from '@/components/common/resume_previewer_context';
 import { uploadJobDescriptions, improveResume } from '@/lib/api/resume';
+import { useTranslations } from 'next-intl';
 
 type SubmissionStatus = 'idle' | 'submitting' | 'success' | 'error';
 type ImprovementStatus = 'idle' | 'improving' | 'error';
@@ -20,6 +21,7 @@ export default function JobDescriptionUploadTextArea() {
 	const { setImprovedData } = useResumePreview();
 	const resumeId = useSearchParams().get('resume_id')!;
 	const router = useRouter();
+	const t = useTranslations('JobDescriptionUploadTextArea');
 
 	const handleChange = useCallback(
 		(e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -35,11 +37,11 @@ export default function JobDescriptionUploadTextArea() {
 			e.preventDefault();
 			const trimmed = text.trim();
 			if (!trimmed) {
-				setFlash({ type: 'error', message: 'Job description cannot be empty.' });
+				setFlash({ type: 'error', message: t('emptyError') });
 				return;
 			}
 			if (!resumeId) {
-				setFlash({ type: 'error', message: 'Missing resume ID.' });
+				setFlash({ type: 'error', message: t('missingResumeIdError') });
 				return;
 			}
 
@@ -48,7 +50,7 @@ export default function JobDescriptionUploadTextArea() {
 				const id = await uploadJobDescriptions([trimmed], resumeId);
 				setJobId(id);
 				setSubmissionStatus('success');
-				setFlash({ type: 'success', message: 'Job description submitted successfully!' });
+				setFlash({ type: 'success', message: t('submitSuccess') });
 			} catch (err) {
 				console.error(err);
 				setSubmissionStatus('error');
@@ -94,7 +96,7 @@ export default function JobDescriptionUploadTextArea() {
 					htmlFor="jobDescription"
 					className="bg-zinc-950/80 text-white absolute start-1 top-0 z-10 block -translate-y-1/2 px-2 text-xs font-medium group-has-disabled:opacity-50"
 				>
-					Job Description <span className="text-red-500">*</span>
+					{t('label')} <span className="text-red-500">*</span>
 				</label>
 				<Textarea
 					id="jobDescription"
@@ -103,7 +105,7 @@ export default function JobDescriptionUploadTextArea() {
 					onChange={handleChange}
 					required
 					aria-required="true"
-					placeholder="Paste the job description here..."
+					placeholder={t('placeholder')}
 					className="w-full bg-gray-800/30 focus:ring-1 border rounded-md dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500/50 border-gray-300 min-h-[300px]"
 				/>
 			</div>
@@ -134,12 +136,12 @@ export default function JobDescriptionUploadTextArea() {
 									d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
 								/>
 							</svg>
-							<span>Submitting...</span>
+							<span>{t('submitting')}</span>
 						</>
 					) : submissionStatus === 'success' ? (
-						<span>Submitted!</span>
+						<span>{t('submitted')}</span>
 					) : (
-						<span>Next</span>
+						<span>{t('next')}</span>
 					)}
 				</Button>
 			</div>
@@ -151,7 +153,7 @@ export default function JobDescriptionUploadTextArea() {
 						disabled={improvementStatus === 'improving'}
 						className="font-semibold py-2 px-6 rounded min-w-[90px] bg-green-600 hover:bg-green-700 text-white"
 					>
-						{improvementStatus === 'improving' ? 'Improving...' : 'Improve'}
+						{improvementStatus === 'improving' ? t('improving') : t('improve')}
 					</Button>
 				</div>
 			)}

@@ -1,3 +1,4 @@
+'use client'
 import JobDescriptionUploadTextArea from '@/components/jd-upload/text-area';
 import BackgroundContainer from '@/components/common/background-container';
 import { Suspense } from 'react';
