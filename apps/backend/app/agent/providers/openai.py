@@ -1,7 +1,8 @@
 import os
 import logging
+import json
+import requests
 
-from openai import OpenAI
 from typing import Any, Dict
 from fastapi.concurrency import run_in_threadpool
 
@@ -13,27 +14,52 @@ logger = logging.getLogger(__name__)
 
 
 class OpenAIProvider(Provider):
-    def __init__(self, api_key: str | None = None, model_name: str = settings.LL_MODEL,
+    def __init__(self, api_key: str | None = None, model_name: str = settings.LL_MODEL,api_base_url: str | None = "https://api.openai.com/v1",
                  opts: Dict[str, Any] = None):
         if opts is None:
             opts = {}
         api_key = api_key or settings.LLM_API_KEY or os.getenv("OPENAI_API_KEY")
         if not api_key:
             raise ProviderError("OpenAI API key is missing")
-        self._client = OpenAI(api_key=api_key)
+        self._api_key = api_key
+        self._api_base_url = api_base_url
         self.model = model_name
         self.opts = opts
         self.instructions = ""
 
     def _generate_sync(self, prompt: str, options: Dict[str, Any]) -> str:
         try:
-            response = self._client.responses.create(
-                model=self.model,
-                instructions=self.instructions,
-                input=prompt,
-                **options,
-            )
-            return response.output_text
+            # 构建请求头
+            headers = {
+                "Authorization": f"Bearer {self._api_key}",
+                "Content-Type": "application/json"
+            }
+            
+            # 构建请求体
+            payload = {
+                "model": self.model,
+                "stream": False,
+                "messages": [
+                    {
+                        'role': 'system',
+                        'content': prompt
+                    }
+                ]
+            }
+            
+            # 添加额外选项
+            payload.update(options)
+            
+            # 发送请求
+            url = f"{self._api_base_url}/chat/completions"
+            response = requests.post(url, headers=headers, json=payload)
+            response.raise_for_status()
+            
+            # 解析响应
+            response_data = response.json()
+            logger.debug(f"使用 'content' 字段成功调用 OpenAI API")
+            return response_data["choices"][0]["message"]["content"]
+                
         except Exception as e:
             raise ProviderError(f"OpenAI - error generating response: {e}") from e
 
@@ -60,14 +86,34 @@ class OpenAIEmbeddingProvider(EmbeddingProvider):
         api_key = api_key or settings.EMBEDDING_API_KEY or os.getenv("OPENAI_API_KEY")
         if not api_key:
             raise ProviderError("OpenAI API key is missing")
-        self._client = OpenAI(api_key=api_key)
+        self._api_key = api_key
+        self._api_base_url = "https://api.openai.com/v1"
         self._model = embedding_model
 
     async def embed(self, text: str) -> list[float]:
         try:
-            response = await run_in_threadpool(
-                self._client.embeddings.create, input=text, model=self._model
-            )
-            return response.data[0].embedding
+            def _embed_sync():
+                # 构建请求头
+                headers = {
+                    "Authorization": f"Bearer {self._api_key}",
+                    "Content-Type": "application/json"
+                }
+                
+                # 构建请求体
+                payload = {
+                    "input": text,
+                    "model": self._model
+                }
+                
+                # 发送请求
+                url = f"{self._api_base_url}/embeddings"
+                response = requests.post(url, headers=headers, json=payload)
+                response.raise_for_status()
+                
+                # 解析响应
+                response_data = response.json()
+                return response_data["data"][0]["embedding"]
+            
+            return await run_in_threadpool(_embed_sync)
         except Exception as e:
             raise ProviderError(f"OpenAI - error generating embedding: {e}") from e

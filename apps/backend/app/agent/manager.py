@@ -36,8 +36,10 @@ class AgentManager:
             case 'openai':
                 from .providers.openai import OpenAIProvider
                 api_key = opts.get("llm_api_key", settings.LLM_API_KEY)
+                llm_api_base_url = opts.get("llm_base_url", settings.LLM_BASE_URL)
                 return OpenAIProvider(model_name=self.model,
                                       api_key=api_key,
+                                      api_base_url=llm_api_base_url,
                                       opts=opts)
             case 'ollama':
                 from .providers.ollama import OllamaProvider
