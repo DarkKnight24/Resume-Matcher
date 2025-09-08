@@ -135,6 +135,7 @@ class ResumeService:
         """
         extract and store structured resume data in the database
         """
+        logger.error(f"resume_text: {resume_text}")
         try:
             structured_resume = await self._extract_structured_json(resume_text)
             if not structured_resume:
