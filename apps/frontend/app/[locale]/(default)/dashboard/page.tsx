@@ -9,6 +9,7 @@ import JobListings from '@/components/dashboard/job-listings';
 import ResumeAnalysis from '@/components/dashboard/resume-analysis';
 import Resume from '@/components/dashboard/resume-component'; // rename import to match default export
 import { useResumePreview } from '@/components/common/resume_previewer_context';
+import { useTranslations } from 'next-intl';
 // import { analyzeJobDescription } from '@/lib/api/jobs';
 
 interface AnalyzedJobData {
@@ -67,13 +68,14 @@ const mockResumeData = {
 };
 
 export default function DashboardPage() {
+	const t = useTranslations('Dashboard');
 	const { improvedData } = useResumePreview();
 	console.log('Improved Data:', improvedData);
 	if (!improvedData) {
 		return (
 			<BackgroundContainer className="min-h-screen" innerClassName="bg-zinc-950">
 				<div className="flex items-center justify-center h-full p-6 text-gray-400">
-					No improved resume found. Please click “Improve” on the Job Upload page first.
+					{t('noImprovedResume')}
 				</div>
 			</BackgroundContainer>
 		);
@@ -86,7 +88,7 @@ export default function DashboardPage() {
 
 	const handleJobUpload = async (text: string): Promise<AnalyzedJobData | null> => {
 		void text; // Prevent unused variable warning
-		alert('Job analysis not implemented yet.');
+		alert(t('jobAnalysisNotImplemented'));
 		return null;
 	};
 
@@ -98,14 +100,10 @@ export default function DashboardPage() {
 				<div className="container mx-auto">
 					<div className="mb-10">
 						<h1 className="text-3xl font-semibold pb-2 text-white">
-							Your{' '}
-							<span className="bg-gradient-to-r from-pink-400 to-purple-400 text-transparent bg-clip-text">
-								Resume Matcher
-							</span>{' '}
-							Dashboard
+							{t('title', { brandName: t('brandName') })}
 						</h1>
 						<p className="text-gray-300 text-lg">
-							Manage your resume and analyze its match with job descriptions.
+							{t('description')}
 						</p>
 					</div>
 
@@ -130,9 +128,9 @@ export default function DashboardPage() {
 						<div className="md:col-span-2">
 							<div className="bg-gray-900/70 backdrop-blur-sm p-6 rounded-lg shadow-xl h-full flex flex-col border border-gray-800/50">
 								<div className="mb-6">
-									<h2 className="text-2xl font-bold text-white mb-1">Your Resume</h2>
+									<h2 className="text-2xl font-bold text-white mb-1">{t('yourResume')}</h2>
 									<p className="text-gray-400 text-sm">
-										This is your resume. Update it via the resume upload page.
+										{t('resumeDescription')}
 									</p>
 								</div>
 								<div className="flex-grow overflow-auto">

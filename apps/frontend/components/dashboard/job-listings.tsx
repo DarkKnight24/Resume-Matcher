@@ -1,4 +1,6 @@
+'use client'
 import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import PasteJobDescription from './paste-job-description';
 
 interface Job {
@@ -20,6 +22,7 @@ interface JobListingsProps {
 }
 
 const JobListings: React.FC<JobListingsProps> = ({ onUploadJob }) => {
+	const t = useTranslations('JobListings');
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [analyzedJob, setAnalyzedJob] = useState<AnalyzedJobData | null>(null);
 	const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -58,15 +61,15 @@ const JobListings: React.FC<JobListingsProps> = ({ onUploadJob }) => {
 
 	return (
 		<div className="bg-gray-900/80 backdrop-blur-sm p-6 rounded-lg shadow-xl border border-gray-800/50">
-			<h2 className="text-2xl font-bold text-white mb-1">Job Analyzer</h2>
+			<h2 className="text-2xl font-bold text-white mb-1">{t('title')}</h2>
 			<p className="text-gray-400 mb-6 text-sm">
 				{analyzedJob
-					? 'Analyzed job details below.'
-					: 'Upload a job description to analyze its key details.'}
+					? t('analyzedJobDetails')
+					: t('uploadJobDescription')}
 			</p>
 			{isAnalyzing ? (
 				<div className="text-center text-gray-400 py-8">
-					<p>Analyzing job description...</p>
+					<p>{t('analyzingJobDescription')}</p>
 					{/* Optional: Add a spinner here */}
 				</div>
 			) : analyzedJob ? (
@@ -83,19 +86,19 @@ const JobListings: React.FC<JobListingsProps> = ({ onUploadJob }) => {
 						onClick={handleOpenModal}
 						className="w-full text-center block bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 px-4 rounded-md transition-colors duration-200 text-sm mt-4"
 					>
-						Analyze Another Job Description
+						{t('analyzeAnotherJob')}
 					</button>
 				</div>
 			) : (
 				<div className="text-center text-gray-400 py-8 flex flex-col justify-center items-center">
 					{/* Optional: Display error message here if setError is implemented */}
 					{/* {error && <p className="text-red-400 mb-3">{error}</p>} */}
-					<p className="mb-3">No job description analyzed yet.</p>
+					<p className="mb-3">{t('noJobAnalyzedYet')}</p>
 					<button
 						onClick={handleOpenModal}
 						className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200 text-sm"
 					>
-						Upload Job Description
+						{t('uploadJobDescriptionButton')}
 					</button>
 				</div>
 			)}

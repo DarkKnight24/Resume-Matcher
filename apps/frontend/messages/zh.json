@@ -42,5 +42,68 @@
     "next": "下一步",
     "improving": "优化中...",
     "improve": "优化"
+  },
+  "Dashboard": {
+    "noImprovedResume": "未找到优化的简历。请先在职位上传页面上点击\"优化\"。",
+    "title": "您的 {brandName} 仪表板",
+    "description": "管理您的简历并分析其与职位描述的匹配度。",
+    "jobAnalysisNotImplemented": "职位分析功能尚未实现。",
+    "yourResume": "您的简历",
+    "resumeDescription": "这是您的简历。请通过简历上传页面进行更新。",
+    "brandName": "简历匹配器"
+  },
+  "Header": {
+    "logo": "munch",
+    "overview": "概览",
+    "signup": "注册",
+    "blog": "博客",
+    "buySpazioBianco": "购买 Spazio Bianco"
+  },
+  "Comp71": {
+    "label": "带重叠标签的文本区域"
+  },
+  "PasteJobDescription": {
+    "emptyError": "职位描述不能为空。",
+    "title": "粘贴职位描述",
+    "closeModal": "关闭模态框",
+    "description": "请在下方粘贴完整的职位描述文本。",
+    "placeholder": "在此处粘贴职位描述...",
+    "textAreaLabel": "职位描述文本区域",
+    "cancel": "取消",
+    "saveButton": "保存职位描述"
+  },
+  "JobListings": {
+    "title": "职位分析器",
+    "analyzedJobDetails": "已分析的职位详情如下。",
+    "uploadJobDescription": "上传职位描述以分析其关键信息。",
+    "analyzingJobDescription": "正在分析职位描述...",
+    "analyzeAnotherJob": "分析另一个职位描述",
+    "noJobAnalyzedYet": "尚未分析任何职位描述。",
+    "uploadJobDescriptionButton": "上传职位描述"
+  },
+  "ResumeAnalysis": {
+    "title": "简历分析",
+    "viewFullAnalysis": "查看完整分析",
+    "detailedResumeAnalysis": "详细简历分析",
+    "overallScore": "总体评分",
+    "summary": "摘要",
+    "details": "详情",
+    "commentary": "评论",
+    "improvementSuggestions": "改进建议",
+    "reference": "参考：",
+    "noImprovementSuggestions": "目前没有具体的改进建议。",
+    "close": "关闭"
+  },
+  "ResumeComponent": {
+    "email": "邮箱",
+    "phone": "电话",
+    "location": "位置",
+    "website": "网站",
+    "linkedin": "领英",
+    "github": "GitHub",
+    "summary": "摘要",
+    "experience": "工作经验",
+    "education": "教育背景",
+    "skills": "技能"
   }
 }

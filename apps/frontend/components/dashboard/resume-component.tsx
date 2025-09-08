@@ -1,4 +1,6 @@
+'use client'
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 interface PersonalInfo {
 	name?: string;
@@ -43,6 +45,7 @@ interface ResumeProps {
 const Resume: React.FC<ResumeProps> = ({ resumeData }) => {
 	console.log('Rendering Resume Component with data:', resumeData);
 	const { personalInfo, summary, experience, education, skills } = resumeData;
+	const t = useTranslations('ResumeComponent');
 
 	// Helper function to render contact details only if they exist
 	const renderContactDetail = (label: string, value?: string, hrefPrefix: string = '') => {
@@ -64,7 +67,7 @@ const Resume: React.FC<ResumeProps> = ({ resumeData }) => {
 
 		return (
 			<div className="text-sm">
-				<span className="font-semibold text-gray-200">{label}:</span>{' '}
+				<span className="font-semibold text-gray-200">{t(label.toLowerCase())}:</span>{' '}
 				{isLink ? (
 					<a
 						href={href}
@@ -111,7 +114,7 @@ const Resume: React.FC<ResumeProps> = ({ resumeData }) => {
 				<div className="mb-8">
 					{/* Lighter text for section titles */}
 					<h3 className="text-xl font-semibold border-b border-gray-700 pb-2 mb-3 text-gray-100">
-						Summary
+						{t('summary')}
 					</h3>
 					{/* Base text color for paragraph */}
 					<p className="text-sm leading-relaxed">{summary}</p>
@@ -122,7 +125,7 @@ const Resume: React.FC<ResumeProps> = ({ resumeData }) => {
 			{experience && experience.length > 0 && (
 				<div className="mb-8">
 					<h3 className="text-xl font-semibold border-b border-gray-700 pb-2 mb-4 text-gray-100">
-						Experience
+						{t('experience')}
 					</h3>
 					{experience.map((exp) => (
 						<div key={exp.id} className="mb-5 pl-4 border-l-2 border-blue-500">
@@ -155,7 +158,7 @@ const Resume: React.FC<ResumeProps> = ({ resumeData }) => {
 			{education && education.length > 0 && (
 				<div className="mb-8">
 					<h3 className="text-xl font-semibold border-b border-gray-700 pb-2 mb-4 text-gray-100">
-						Education
+						{t('education')}
 					</h3>
 					{education.map((edu) => (
 						<div key={edu.id} className="mb-5 pl-4 border-l-2 border-green-500">
@@ -182,7 +185,7 @@ const Resume: React.FC<ResumeProps> = ({ resumeData }) => {
 			{skills && skills.length > 0 && (
 				<div>
 					<h3 className="text-xl font-semibold border-b border-gray-700 pb-2 mb-3 text-gray-100">
-						Skills
+						{t('skills')}
 					</h3>
 					<div className="flex flex-wrap gap-2">
 						{skills.map(

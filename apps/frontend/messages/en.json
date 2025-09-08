@@ -42,5 +42,68 @@
     "next": "Next",
     "improving": "Improving...",
     "improve": "Improve"
+  },
+  "Dashboard": {
+    "noImprovedResume": "No improved resume found. Please click \"Improve\" on the Job Upload page first.",
+    "title": "Your {brandName} Dashboard",
+    "description": "Manage your resume and analyze its match with job descriptions.",
+    "jobAnalysisNotImplemented": "Job analysis not implemented yet.",
+    "yourResume": "Your Resume",
+    "resumeDescription": "This is your resume. Update it via the resume upload page.",
+    "brandName": "Resume Matcher"
+  },
+  "Header": {
+    "logo": "munch",
+    "overview": "Overview",
+    "signup": "Sign up",
+    "blog": "Blog",
+    "buySpazioBianco": "Buy Spazio Bianco"
+  },
+  "Comp71": {
+    "label": "Textarea with overlapping label"
+  },
+  "PasteJobDescription": {
+    "emptyError": "Job description cannot be empty.",
+    "title": "Paste Job Description",
+    "closeModal": "Close modal",
+    "description": "Paste the full job description text below.",
+    "placeholder": "Paste job description here...",
+    "textAreaLabel": "Job description text area",
+    "cancel": "Cancel",
+    "saveButton": "Save Job Description"
+  },
+  "JobListings": {
+    "title": "Job Analyzer",
+    "analyzedJobDetails": "Analyzed job details below.",
+    "uploadJobDescription": "Upload a job description to analyze its key details.",
+    "analyzingJobDescription": "Analyzing job description...",
+    "analyzeAnotherJob": "Analyze Another Job Description",
+    "noJobAnalyzedYet": "No job description analyzed yet.",
+    "uploadJobDescriptionButton": "Upload Job Description"
+  },
+  "ResumeAnalysis": {
+    "title": "Resume Analysis",
+    "viewFullAnalysis": "View Full Analysis",
+    "detailedResumeAnalysis": "Detailed Resume Analysis",
+    "overallScore": "Overall Score",
+    "summary": "Summary",
+    "details": "Details",
+    "commentary": "Commentary",
+    "improvementSuggestions": "Improvement Suggestions",
+    "reference": "Reference: ",
+    "noImprovementSuggestions": "No specific improvement suggestions at this time.",
+    "close": "Close"
+  },
+  "ResumeComponent": {
+    "email": "Email",
+    "phone": "Phone",
+    "location": "Location",
+    "website": "Website",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "summary": "Summary",
+    "experience": "Experience",
+    "education": "Education",
+    "skills": "Skills"
   }
 }

@@ -169,43 +169,6 @@ if (-not (Get-Command "uv" -ErrorAction SilentlyContinue)) {
 
 Write-Success "All core prerequisites satisfied."
 
-# Install Ollama if not present
-Write-Info "Checking Ollama installation..."
-if (-not (Get-Command "ollama" -ErrorAction SilentlyContinue)) {
-    Write-Info "ollama not found; installing..."
-    # Check if winget is available
-    if (Get-Command "winget" -ErrorAction SilentlyContinue) {
-        try {
-            Write-Info "Installing Ollama using winget..."
-            winget install --id=Ollama.Ollama -e
-            Write-Success "Ollama installed via winget"
-            Write-Info "Please restart your terminal and run setup.ps1 again to complete the setup"
-        } catch {
-            Write-CustomError "Failed to install Ollama via winget. Please install manually from https://ollama.com/download/windows"
-        }
-    } else {
-        Write-CustomError "winget is not available. Please install Ollama manually from https://ollama.com/download/windows"
-    }
-} else {
-    Write-Success "Ollama is already installed"
-}
-
-# Pull Ollama model
-if (Get-Command "ollama" -ErrorAction SilentlyContinue) {
-    try {
-        $OllamaList = ollama list 2>&1
-        if ($OllamaList -notmatch "gemma3:4b") {
-            Write-Info "Pulling gemma3:4b model... (this may take a while)"
-            ollama pull gemma3:4b
-            Write-Success "gemma3:4b model ready"
-        } else {
-            Write-Info "gemma3:4b model already present—skipping"
-        }
-    } catch {
-        Write-Info "Warning: Failed to pull gemma3:4b model. You may need to install it manually later."
-    }
-}
-
 # Bootstrap root .env
 if ((Test-Path ".env.example") -and (-not (Test-Path ".env"))) {
     Write-Info "Bootstrapping root .env from .env.example"
