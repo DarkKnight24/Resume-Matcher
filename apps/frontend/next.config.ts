@@ -1,8 +1,10 @@
-import type { NextConfig } from "next";
+const withNextIntl = require('next-intl/plugin')(
+  './i18n.ts'
+);
 
-const nextConfig: NextConfig = {
-  /* config options here */
-    async rewrites() {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  async rewrites() {
     return [
       {
         source: '/api_be/:path*',
@@ -12,4 +14,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = withNextIntl(nextConfig);

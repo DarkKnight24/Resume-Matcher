@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import {
 	AlertCircleIcon,
 	CheckCircle2Icon,
@@ -23,6 +24,7 @@ const acceptString = acceptedFileTypes.join(',');
 const API_RESUME_UPLOAD_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/resumes/upload`; // API endpoint
 
 export default function FileUpload() {
+	const t = useTranslations('FileUpload');
 	const maxSize = 2 * 1024 * 1024; // 2MB
 
 	const [uploadFeedback, setUploadFeedback] = useState<{
@@ -58,14 +60,14 @@ export default function FileUpload() {
 				console.error('Missing resume_id in upload response', response)
 				setUploadFeedback({
 					type: 'error',
-					message: 'Upload succeeded but no resume ID received.',
+					message: t('uploadSuccessNoId'),
 				})
 				return
 			}
 
 			setUploadFeedback({
 				type: 'success',
-				message: `${(uploadedFile.file as FileMetadata).name} uploaded successfully!`,
+				message: `${(uploadedFile.file as FileMetadata).name} ${t('uploadSuccess')}`,
 			});
 			clearErrors();
 			const encodedResumeId = encodeURIComponent(resumeId);
@@ -75,7 +77,7 @@ export default function FileUpload() {
 			console.error('Upload error:', file, errorMsg);
 			setUploadFeedback({
 				type: 'error',
-				message: errorMsg || 'An unknown error occurred during upload.',
+				message: errorMsg || t('unknownError'),
 			});
 		},
 		onFilesChange: (currentFiles) => {
@@ -122,8 +124,8 @@ export default function FileUpload() {
 				aria-disabled={Boolean(currentFile) || isUploadingGlobal}
 				aria-label={
 					currentFile
-						? 'File selected. Remove to upload another.'
-						: 'File upload dropzone. Drag & drop or click to browse.'
+						? t('fileSelected')
+						: t('dropzoneLabel')
 				}
 			>
 				<div className="flex min-h-48 w-full flex-col items-center justify-center p-6 text-center">
@@ -131,9 +133,9 @@ export default function FileUpload() {
 					{isUploadingGlobal ? (
 						<>
 							<Loader2Icon className="mb-4 size-10 animate-spin text-primary" />
-							<p className="text-lg font-semibold text-white">Uploading...</p>
+							<p className="text-lg font-semibold text-white">{t('uploading')}</p>
 							<p className="text-sm text-muted-foreground">
-								Your file is being processed.
+								{t('processing')}
 							</p>
 						</>
 					) : (
@@ -142,14 +144,12 @@ export default function FileUpload() {
 								<UploadIcon className="size-6" />
 							</div>
 							<p className="mb-1 text-lg font-semibold text-white">
-								{currentFile ? 'File Ready' : 'Upload Your Resume'}
+								{currentFile ? t('fileReady') : t('uploadResume')}
 							</p>
 							<p className="text-sm text-muted-foreground">
 								{currentFile
 									? currentFile.file.name // name is on both File and FileMetadata
-									: `Drag & drop or click (PDF, DOCX up to ${formatBytes(
-										maxSize,
-									)})`}
+									: t('dragDropClick', { maxSize: formatBytes(maxSize) })}
 							</p>
 						</>
 					)}
@@ -166,7 +166,7 @@ export default function FileUpload() {
 						<div className="flex items-start gap-2">
 							<AlertCircleIcon className="mt-0.5 size-5 shrink-0" />
 							<div>
-								<p className="font-semibold">Error</p>
+								<p className="font-semibold">{t('error')}</p>
 								{displayErrors.map((error, index) => (
 									<p key={index}>{error}</p>
 								))}
@@ -183,7 +183,7 @@ export default function FileUpload() {
 					<div className="flex items-start gap-2">
 						<CheckCircle2Icon className="mt-0.5 size-5 shrink-0" />
 						<div>
-							<p className="font-semibold">Success</p>
+							<p className="font-semibold">{t('success')}</p>
 							<p>{uploadFeedback.message}</p>
 						</div>
 					</div>
@@ -205,10 +205,10 @@ export default function FileUpload() {
 									{/* size is on both File and FileMetadata */}
 									{/* After upload attempt, .file is FileMetadata */}
 									{(currentFile.file as FileMetadata).uploaded === true
-										? 'Uploaded'
+										? t('uploaded')
 										: (currentFile.file as FileMetadata).uploadError
-											? 'Upload failed'
-											: 'Pending upload'}
+											? t('uploadFailed')
+											: t('pendingUpload')}
 								</p>
 							</div>
 						</div>
@@ -217,7 +217,7 @@ export default function FileUpload() {
 							variant="ghost"
 							className="size-8 shrink-0 text-muted-foreground hover:text-white"
 							onClick={() => handleRemoveFile(currentFile.id)}
-							aria-label="Remove file"
+							aria-label={t('removeFile')}
 							disabled={isUploadingGlobal}
 						>
 							<XIcon className="size-5" />
@@ -226,7 +226,7 @@ export default function FileUpload() {
 					{/* Display uploadError if it exists on FileMetadata */}
 					{(currentFile.file as FileMetadata).uploadError && (
 						<p className="mt-2 text-xs text-destructive">
-							Error: {(currentFile.file as FileMetadata).uploadError}
+							{t('errorMessage')}{(currentFile.file as FileMetadata).uploadError}
 						</p>
 					)}
 				</div>

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import LanguageSwitcher from '@/components/common/language-switcher';
 
 const Header = () => {
 	return (
@@ -26,6 +27,7 @@ const Header = () => {
 					>
 						Buy Spazio Bianco
 					</Link>
+					<LanguageSwitcher />
 				</nav>
 			</div>
 		</header>

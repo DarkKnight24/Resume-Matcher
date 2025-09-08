@@ -1,0 +1,34 @@
+{
+  "ProvideJobDescriptionsPage": {
+    "title": "Provide Job Descriptions",
+    "description": "Paste up to three job descriptions below. We'll use these to compare against your resume and find the best matches.",
+    "loadingText": "Loading input..."
+  },
+  "Hero": {
+    "tagline": "Increase your interview chances with a perfectly tailored resume.",
+    "getStarted": "Get Started"
+  },
+  "UploadResume": {
+    "title": "Upload Your Resume",
+    "description": "Drag and drop your resume file below or click to browse. Supported formats: PDF, DOC, DOCX (Upto 2 MB)."
+  },
+  "FileUpload": {
+    "uploadSuccessNoId": "Upload succeeded but no resume ID received.",
+    "uploadSuccess": "uploaded successfully!",
+    "unknownError": "An unknown error occurred during upload.",
+    "fileSelected": "File selected. Remove to upload another.",
+    "dropzoneLabel": "File upload dropzone. Drag & drop or click to browse.",
+    "uploading": "Uploading...",
+    "processing": "Your file is being processed.",
+    "fileReady": "File Ready",
+    "uploadResume": "Upload Your Resume",
+    "dragDropClick": "Drag & drop or click (PDF, DOCX up to {maxSize})",
+    "error": "Error",
+    "success": "Success",
+    "uploaded": "Uploaded",
+    "uploadFailed": "Upload failed",
+    "pendingUpload": "Pending upload",
+    "removeFile": "Remove file",
+    "errorMessage": "Error: "
+  }
+}

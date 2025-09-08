@@ -1,0 +1,34 @@
+{
+  "ProvideJobDescriptionsPage": {
+    "title": "提供职位描述",
+    "description": "请在下方粘贴最多三个职位描述。我们将使用这些信息与您的简历进行比较，以找出最佳匹配。",
+    "loadingText": "正在加载输入框..."
+  },
+  "Hero": {
+    "tagline": "通过完美定制的简历提高您的面试机会。",
+    "getStarted": "开始使用"
+  },
+  "UploadResume": {
+    "title": "上传你的简历",
+    "description": "将你的简历文件拖放到下方，或点击浏览。支持的格式：PDF, DOC, DOCX（最大 2 MB）。"
+  },
+  "FileUpload": {
+    "uploadSuccessNoId": "上传成功但未收到简历ID。",
+    "uploadSuccess": "上传成功！",
+    "unknownError": "上传过程中发生未知错误。",
+    "fileSelected": "已选择文件。删除以上传其他文件。",
+    "dropzoneLabel": "文件上传区域。拖放或点击浏览。",
+    "uploading": "上传中...",
+    "processing": "您的文件正在处理中。",
+    "fileReady": "文件已就绪",
+    "uploadResume": "上传你的简历",
+    "dragDropClick": "拖放或点击（PDF, DOCX 最大 {maxSize}）",
+    "error": "错误",
+    "success": "成功",
+    "uploaded": "已上传",
+    "uploadFailed": "上传失败",
+    "pendingUpload": "等待上传",
+    "removeFile": "删除文件",
+    "errorMessage": "错误："
+  }
+}
