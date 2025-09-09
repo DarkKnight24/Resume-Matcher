@@ -22,8 +22,12 @@ export default function LanguageSwitcher() {
       value={locale}
       onChange={handleChange}
     >
-      <option value="en" className="text-black">English</option>
-      <option value="zh" className="text-black">中文</option>
+      <option value="en" className="text-black">
+        English
+      </option>
+      <option value="zh" className="text-black">
+        中文
+      </option>
     </select>
   );
 }

@@ -77,7 +77,8 @@ class EmbeddingManager:
             case 'openai':
                 from .providers.openai import OpenAIEmbeddingProvider
                 api_key = kwargs.get("openai_api_key", settings.EMBEDDING_API_KEY)
-                return OpenAIEmbeddingProvider(api_key=api_key, embedding_model=self._model)
+                api_base_url = kwargs.get("embedding_base_url", settings.EMBEDDING_BASE_URL)
+                return OpenAIEmbeddingProvider(api_key=api_key, api_base_url=api_base_url, embedding_model=self._model)
             case 'ollama':
                 from .providers.ollama import OllamaEmbeddingProvider
                 model = kwargs.get("embedding_model", self._model)

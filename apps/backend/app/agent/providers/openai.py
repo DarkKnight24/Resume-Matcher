@@ -81,13 +81,14 @@ class OpenAIEmbeddingProvider(EmbeddingProvider):
     def __init__(
         self,
         api_key: str | None = None,
+        api_base_url: str | None = "https://api.openai.com/v1",
         embedding_model: str = settings.EMBEDDING_MODEL,
     ):
         api_key = api_key or settings.EMBEDDING_API_KEY or os.getenv("OPENAI_API_KEY")
         if not api_key:
             raise ProviderError("OpenAI API key is missing")
         self._api_key = api_key
-        self._api_base_url = "https://api.openai.com/v1"
+        self._api_base_url = api_base_url
         self._model = embedding_model
 
     async def embed(self, text: str) -> list[float]:
